@@ -3,13 +3,12 @@ package com.mustache.bbs1.domain.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity // Entity 선언 시 @Id 꼭 필요!
 @Getter
+@Table(name = "newarticle")
 @NoArgsConstructor
 @AllArgsConstructor // update 페이지를 위해 id 추가하고 all 추가
 public class Article {
