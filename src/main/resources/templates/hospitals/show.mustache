@@ -1,0 +1,14 @@
+{{>layouts/header}}
+<div class="card container">
+    {{#hospital}}
+        <h5 class="card-header">{{id}}</h5>
+        <div class="card-body">
+            <h5 class="card-title">{{hospitalName}}</h5>
+            <p class="card-text">{{roadNameAddress}}</p>
+            <a class="btn btn-primary" href="/hospitals/" role="button">List</a>
+            <a class="btn btn-primary" href="/hospitals/{{id}}/edit" role="button">Edit</a>
+            <a class="btn btn-primary" href="/hospitals/{{id}}/delete" role="button">Delete</a>
+        </div>
+    {{/hospital}}
+</div>
+{{>layouts/footer}}
