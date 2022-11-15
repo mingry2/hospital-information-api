@@ -16,4 +16,5 @@ public class HospitalDto {
     public Hospital toEntity(){
         return new Hospital(this.id, this.roadNameAddress, this.hospitalName);
     }
+
 }
