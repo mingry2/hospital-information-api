@@ -4,7 +4,6 @@ import com.mustache.bbs1.domain.dto.HospitalResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Entity
@@ -25,6 +24,7 @@ public class Hospital {
     private Integer patientRoomCount;
     private Integer totalNumberOfBeds;
     private String businessTypeName;
+    private Integer businessStatusCode;
     private Float totalAreaSize;
 
     public static HospitalResponse of(Hospital hospital) {
