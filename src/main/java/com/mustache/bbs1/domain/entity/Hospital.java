@@ -2,10 +2,12 @@ package com.mustache.bbs1.domain.entity;
 
 import com.mustache.bbs1.domain.dto.HospitalResponse;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
+@Builder
 @Entity
 @Table(name = "nation_wide_hospitals")
 @Getter

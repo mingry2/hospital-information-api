@@ -9,10 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Optional;
 
 
@@ -100,5 +98,18 @@ public class HospitalController {
     public String deleteHospital(@PathVariable Integer id){
         hospitalRepository.deleteById(id);
         return "redirect:/hospitals/";
+    }
+
+    // 특정 키워드로 검색기능 추가
+    @GetMapping("/search")
+    public String search(@RequestParam String keyword, Pageable pageable, Model model) {
+        log.info("keyword: {}", keyword);
+        Page<Hospital> hospitals = hospitalRepository.findByRoadNameAddressContaining(keyword, pageable);
+        model.addAttribute("hospitals", hospitals);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+
+        return "hospitals/list";
     }
 }
