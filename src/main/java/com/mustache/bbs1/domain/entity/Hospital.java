@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
 
 @Builder
 @Entity
@@ -22,6 +23,7 @@ public class Hospital {
 
     @Column(name = "hospital_name")
     private String hospitalName;
+
 
     private Integer patientRoomCount;
     private Integer totalNumberOfBeds;
