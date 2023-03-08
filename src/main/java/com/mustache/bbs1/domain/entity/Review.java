@@ -29,7 +29,7 @@ public class Review extends BaseEntity {
 
     private String content; //리뷰 내용
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user; //리뷰 작성자
 

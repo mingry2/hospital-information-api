@@ -7,12 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
-@Builder
 @Entity
-@Table(name = "nation_wide_hospitals")
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Builder
 public class Hospital {
     @Id
     private Long id;

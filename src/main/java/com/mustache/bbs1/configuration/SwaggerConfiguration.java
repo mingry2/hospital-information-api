@@ -16,6 +16,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 public class SwaggerConfiguration {
 
+	//http://localhost:8080/swagger-ui/
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.OAS_30)
@@ -24,7 +25,7 @@ public class SwaggerConfiguration {
 //                .useDefaultResponseMessages(false) // 기본 응답 메세지 삭제 -> @ApiResponse 로 설명하지 않은 401, 403, 404 응답들이 사라짐.
 				.select()
 				.apis(RequestHandlerSelectors.basePackage(
-						"com.mutsasns.finalproject_kimmingyeong.controller"))
+						"com.mustache.bbs1.controller.rest"))
 				.paths(PathSelectors.any())
 				.build();
 	}

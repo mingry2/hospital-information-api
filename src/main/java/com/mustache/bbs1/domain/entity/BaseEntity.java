@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 public class BaseEntity {
-
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
