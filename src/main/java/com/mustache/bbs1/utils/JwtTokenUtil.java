@@ -23,13 +23,14 @@ public class JwtTokenUtil {
         return openToken(token,secretKey).getExpiration().before(new Date());
     }
 
-    public static String createToken(String secretKey){
+    public static String createToken(String userName, String secretKey, Long expireTimeMs){
         Claims claims = Jwts.claims();
-        claims.put("userName", "mingyeong1");
+        claims.put("userName", userName);
+
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+3600000))
+                .setExpiration(new Date(System.currentTimeMillis() + expireTimeMs))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }

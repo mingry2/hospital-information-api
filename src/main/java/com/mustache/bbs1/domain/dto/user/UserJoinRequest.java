@@ -1,6 +1,7 @@
 package com.mustache.bbs1.domain.dto.user;
 
 import com.mustache.bbs1.domain.entity.User;
+import com.mustache.bbs1.domain.entity.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,14 +11,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
-public class UserJoinResponse {
-	private Long id;
+public class UserJoinRequest {
 	private String userName;
+	private String password;
 
-	public static UserJoinResponse from(User savedUser) {
-		return UserJoinResponse.builder()
-				.id(savedUser.getId())
-				.userName(savedUser.getUserName())
+	public User toEntity(String encodedPassword) {
+		return User.builder()
+				.userName(this.userName)
+				.password(encodedPassword)
+				.role(UserRole.ROLE_USER)
 				.build();
 	}
 }

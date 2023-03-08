@@ -28,26 +28,29 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends BaseEntity implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends BaseEntity {
 
-    @JsonProperty(access = Access.WRITE_ONLY)
-    @Column(nullable = false)
-    private String uid;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String userName;
+//    @JsonProperty(access = Access.WRITE_ONLY)
+//    @Column(nullable = false)
+//    private String uid;
 
-    private String password;
+	@Column(unique = true, nullable = false)
+	private String userName;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
-    private List<String> roles = new ArrayList<>();
+	private String password;
+
+	private UserRole role;
+
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    @Builder.Default
+//    private List<String> roles = new ArrayList<>();
 
 
-    /* UserDetails 구현 */
+    /* UserDetails 구현
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { //계정이 가지고 있는 권한 목록 리턴
         return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
@@ -82,5 +85,7 @@ public class User extends BaseEntity implements UserDetails {
     public boolean isEnabled() { //계정 활성화 여부 -> true 활성화 상태임
         return true;
     }
+
+    */
 
 }
