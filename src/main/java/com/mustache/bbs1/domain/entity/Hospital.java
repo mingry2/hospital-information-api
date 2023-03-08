@@ -1,12 +1,11 @@
 package com.mustache.bbs1.domain.entity;
 
-import com.mustache.bbs1.domain.dto.HospitalResponse;
+import com.mustache.bbs1.domain.dto.hospital.HospitalResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import java.util.List;
 
 @Builder
 @Entity
@@ -42,7 +41,7 @@ public class Hospital {
                                     hospital.getTotalAreaSize());
     }
 
-    public Hospital(Integer id, String roadNameAddress, String hospitalName) {
+    public Hospital(Long id, String roadNameAddress, String hospitalName) {
         this.id = id;
         this.roadNameAddress = roadNameAddress;
         this.hospitalName = hospitalName;

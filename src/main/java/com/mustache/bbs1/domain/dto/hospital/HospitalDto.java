@@ -1,4 +1,4 @@
-package com.mustache.bbs1.domain.dto;
+package com.mustache.bbs1.domain.dto.hospital;
 
 import com.mustache.bbs1.domain.entity.Hospital;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class HospitalDto {
 
-    private Integer id;
+    private Long id;
     private String roadNameAddress;
     private String hospitalName;
 

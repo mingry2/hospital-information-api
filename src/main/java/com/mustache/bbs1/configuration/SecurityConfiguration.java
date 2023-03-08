@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                 .cors().and() //cross 사이트에서 도메인이 다를 때 허용해주는 것
                 .authorizeRequests()
                 .antMatchers("/api/v1/users").permitAll() //join, login은 언제나 가능
-                .antMatchers("/api/v1/reviews").authenticated() //접근 요청 막기, permitAll 다음에 입력해줘야함, 순서대로 진행되기 때문
+                .antMatchers("/api/v1").authenticated() //접근 요청 막기, permitAll 다음에 입력해줘야함, 순서대로 진행되기 때문
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //jwt사용하는 경우 씀

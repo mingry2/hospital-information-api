@@ -1,6 +1,6 @@
 package com.mustache.bbs1.controller.ui;
 
-import com.mustache.bbs1.domain.dto.HospitalDto;
+import com.mustache.bbs1.domain.dto.hospital.HospitalDto;
 import com.mustache.bbs1.domain.entity.Hospital;
 import com.mustache.bbs1.repository.HospitalRepository;
 import lombok.extern.slf4j.Slf4j;

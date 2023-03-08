@@ -13,24 +13,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/reviews")
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class ReviewRestController {
     private final ReviewService reviewService;
 
     //리뷰 등록
-    @PostMapping(value = "")
-    public ResponseEntity<Response<ReviewCreateResponse>> createReview(@RequestBody ReviewCreateRequest reviewCreateRequest) {
-        ReviewCreateResponse reviewCreateResponse = reviewService.create(reviewCreateRequest);
+    @PostMapping(value = "/hospitals/{hospitalId}/reviews")
+    public ResponseEntity<Response<ReviewCreateResponse>> createReview(@RequestBody ReviewCreateRequest reviewCreateRequest, @PathVariable Long hospitalId, @AuthenticationPrincipal UserDetails user) {
+        ReviewCreateResponse reviewCreateResponse = reviewService.create(reviewCreateRequest, hospitalId, user.getUsername());
 
         return ResponseEntity.created(URI.create("api/v1/reviews" + reviewCreateResponse.getId())).body(Response.success(reviewCreateResponse));
     }
 
-    //리뷰 상세 조회(단건)
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Response<ReviewResponse>> getReview(@PathVariable Long id, @AuthenticationPrincipal UserDetails user){
-        ReviewResponse reviewResponse = reviewService.get(id, user.getUsername());
-
-        return ResponseEntity.ok().body(Response.success(reviewResponse));
-    }
+//    //리뷰 상세 조회(단건)
+//    @GetMapping(value = "/{id}")
+//    public ResponseEntity<Response<ReviewResponse>> getReview(@PathVariable Long id, @AuthenticationPrincipal UserDetails user){
+//        ReviewResponse reviewResponse = reviewService.get(id, user.getUsername());
+//
+//        return ResponseEntity.ok().body(Response.success(reviewResponse));
+//    }
 }
