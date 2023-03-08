@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class HospitalResponse { // Dto는 생략
 
-    private Integer id;
+    private Long id;
     private String roadNameAddress;
     private String hospitalName;
     private Integer patientRoomCount;
@@ -19,7 +19,7 @@ public class HospitalResponse { // Dto는 생략
     private String businessTypeName;
     private Float totalAreaSize;
 
-    public HospitalResponse(Integer id, String roadNameAddress, String hospitalName, Integer patientRoomCount, Integer totalNumberOfBeds, String businessTypeName, Float totalAreaSize) {
+    public HospitalResponse(Long id, String roadNameAddress, String hospitalName, Integer patientRoomCount, Integer totalNumberOfBeds, String businessTypeName, Float totalAreaSize) {
         this.id = id;
         this.roadNameAddress = roadNameAddress;
         this.hospitalName = hospitalName;

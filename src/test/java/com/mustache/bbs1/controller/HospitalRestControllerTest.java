@@ -1,5 +1,6 @@
 package com.mustache.bbs1.controller;
 
+import com.mustache.bbs1.controller.rest.HospitalRestController;
 import com.mustache.bbs1.domain.dto.HospitalResponse;
 import com.mustache.bbs1.service.HospitalService;
 import org.junit.jupiter.api.DisplayName;

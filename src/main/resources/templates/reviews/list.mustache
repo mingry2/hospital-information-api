@@ -1,0 +1,21 @@
+{{>layouts/header}}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">TITLE</th>
+        <th scope="col">CONTENT</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#reviews}}
+    <tr>
+        <th scope="row">{{id}}</th>
+        <td><a href="/reviews/{{id}}">{{title}}</a></td>
+        <td>{{content}}</td>
+    </tr>
+    {{/reviews}}
+    </tbody>
+</table>
+<a class="btn btn-primary" href="new" role="button">새 글쓰기</a>
+{{>layouts/footer}}

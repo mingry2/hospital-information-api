@@ -1,0 +1,15 @@
+{{>layouts/header}}
+<div class="card" style="width: 18rem;">
+    {{#review}}
+    <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">{{id}}</h6>
+        <h5 class="card-title">{{title}}</h5>
+        <p class="card-text">{{content}}</p>
+        <a class="btn btn-primary" href="new" role="button">새 글쓰기</a>
+        <a class="btn btn-primary" href="list" role="button">목록</a>
+    </div>
+        <a class="btn btn-primary" href="/reviews/{{id}}/edit" role="button">수정</a>
+        <a class="btn btn-danger" href="/reviews/{{id}}/delete" role="button">삭제</a>
+    {{/review}}
+</div>
+{{>layouts/footer}}

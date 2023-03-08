@@ -16,20 +16,21 @@ import java.util.List;
 @NoArgsConstructor
 public class Hospital {
     @Id
-    private Integer id;
+    private Long id;
 
-    @Column(name = "road_name_address")
-    private String roadNameAddress;
+    private String roadNameAddress; //도로명 주소
 
-    @Column(name = "hospital_name")
-    private String hospitalName;
+    private String hospitalName; //병,의원명
 
+    private Integer patientRoomCount; //병실수
 
-    private Integer patientRoomCount;
-    private Integer totalNumberOfBeds;
-    private String businessTypeName;
-    private Integer businessStatusCode;
-    private Float totalAreaSize;
+    private Integer totalNumberOfBeds; //병실 내 침대수
+
+    private String businessTypeName; //사업명(의원, 치과의원, 한의원...)
+
+    private Integer businessStatusCode; //사업 상태 코드(영업, 폐업)
+
+    private Float totalAreaSize; //총 면적
 
     public static HospitalResponse of(Hospital hospital) {
         return new HospitalResponse(hospital.getId(),

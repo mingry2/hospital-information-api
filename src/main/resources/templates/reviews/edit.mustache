@@ -1,0 +1,13 @@
+{{>layouts/header}}
+여기는 Edit Page입니다.
+    {{#review}}
+        <form action="/reviews/{{id}}/update" method="post">
+            <input type="hidden" name="id" value="{{id}}" />
+            <input type="text" name="title" value="{{title}}" />
+            <textarea rows="3" name="content">{{content}}</textarea>
+            <input type="submit" />
+        </form>
+        <a href="/reviews/{{id}}">1개 조회 페이지</a>
+        <a href="/reviews">목록</a>
+    {{/review}}
+{{>layouts/footer}}
