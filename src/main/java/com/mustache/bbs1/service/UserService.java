@@ -65,4 +65,10 @@ public class UserService {
 		return token;
 	}
 
+	//UserDetail 설정
+	public User getUserByUserName(String userName) {
+		//userName이 존재하지 않으면 예외 발생
+		return userRepository.findByUserName(userName)
+				.orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND, ErrorCode.USERNAME_NOT_FOUND.getMessage()));
+	}
 }

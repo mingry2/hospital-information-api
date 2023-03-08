@@ -1,5 +1,6 @@
 package com.mustache.bbs1.configuration;
 
+import com.mustache.bbs1.service.UserService;
 import com.mustache.bbs1.utils.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
-    private final JwtTokenUtil jwtTokenUtil;
+    private final UserService userService;
 
     @Value("${jwt.token.secret}")
     private String secretKey;
@@ -29,13 +30,14 @@ public class SecurityConfiguration {
                 .csrf().disable() //CSRF 보안 필요 시 -> 비활성화
                 .cors().and() //cross 사이트에서 도메인이 다를 때 허용해주는 것
                 .authorizeRequests()
-                .antMatchers("**articles**", "**hospital**").permitAll() //join, login은 언제나 가능
-                .antMatchers(HttpMethod.POST, "/api/v1/visits").authenticated() //접근 요청 막기, permitAll 다음에 입력해줘야함, 순서대로 진행되기 때문
+                .antMatchers("/api/v1/users").permitAll() //join, login은 언제나 가능
+                .antMatchers("/api/v1/reviews").authenticated() //접근 요청 막기, permitAll 다음에 입력해줘야함, 순서대로 진행되기 때문
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //jwt사용하는 경우 씀
                 .and()
-                .addFilterBefore(new JwtTokenFilter(secretKey), UsernamePasswordAuthenticationFilter.class) //UserNamePasswordAuthenticationFilter적용하기 전에 JWTTokenFilter를 적용 하라는 뜻 입니다.
+                .addFilterBefore(new JwtTokenFilter(userService, secretKey), UsernamePasswordAuthenticationFilter.class) //UserNamePasswordAuthenticationFilter적용하기 전에 JWTTokenFilter를 적용 하라는 뜻 입니다.
                 .build();
     }
+
 }

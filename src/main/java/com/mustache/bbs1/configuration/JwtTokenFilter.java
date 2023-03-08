@@ -1,8 +1,10 @@
 package com.mustache.bbs1.configuration;
 
+import com.mustache.bbs1.domain.entity.User;
 import com.mustache.bbs1.service.UserService;
 import com.mustache.bbs1.utils.JwtTokenUtil;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,7 +20,10 @@ import java.io.IOException;
 import java.util.List;
 
 @AllArgsConstructor
+@Slf4j
 public class JwtTokenFilter extends OncePerRequestFilter {
+
+    private final UserService userService;
 
     private String secretKey;
 
@@ -52,12 +57,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         String userName = JwtTokenUtil.openToken(token, secretKey).get("userName").toString();
 
         //userDetail 설정
-//        User user = userService.getUserByUserName(userName);
-//        log.debug("userRole: {}", user.getRole());
+        User user = userService.getUserByUserName(userName);
+        log.debug("userRole: {}", user.getRole());
 
         //문열어주기
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(userName, null, List.of(new SimpleGrantedAuthority("USER")));
+                new UsernamePasswordAuthenticationToken(userName, null, List.of(new SimpleGrantedAuthority(user.getRole().name())));
 
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
