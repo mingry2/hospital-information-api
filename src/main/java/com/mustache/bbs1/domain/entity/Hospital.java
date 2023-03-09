@@ -30,7 +30,7 @@ public class Hospital {
 
     private Float totalAreaSize; //총 면적
 
-    public static HospitalResponse of(Hospital hospital) {
+    public static HospitalResponse from(Hospital hospital) {
         return new HospitalResponse(hospital.getId(),
                                     hospital.getRoadNameAddress(),
                                     hospital.getHospitalName(),

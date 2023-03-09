@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class HospitalDto {
+public class HospitalCreateRequest {
 
     private Long id;
     private String roadNameAddress;
