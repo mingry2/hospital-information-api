@@ -14,6 +14,7 @@ public enum ErrorCode {
 	DUPLICATED_USER_NAME(HttpStatus.CONFLICT, "UserName이 중복됩니다."),
 	INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "패스워드가 잘못되었습니다."),
 	HOSPITAL_NOT_FOUND(HttpStatus.NOT_FOUND, "Not founded"),
+	REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "Not founded"),
 	;
 
 	private final HttpStatus status;

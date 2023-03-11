@@ -1,8 +1,9 @@
 package com.mustache.bbs1.configuration;
 
 import com.mustache.bbs1.domain.entity.User;
+import com.mustache.bbs1.exception.ErrorCode;
 import com.mustache.bbs1.service.UserService;
-import com.mustache.bbs1.utils.JwtTokenUtil;
+import com.mustache.bbs1.utils.JwtUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -21,48 +22,44 @@ import java.util.List;
 
 @AllArgsConstructor
 @Slf4j
-public class JwtTokenFilter extends OncePerRequestFilter {
+public class JwtFilter extends OncePerRequestFilter {
 
     private final UserService userService;
 
-    private String secretKey;
+    private final String secretKey;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, RuntimeException {
 
-        String header = request.getHeader(HttpHeaders.AUTHORIZATION); //header에 있는 정보 꺼내오기
+        final String authorization = request.getHeader(HttpHeaders.AUTHORIZATION); //authorization에 있는 정보 꺼내오기
+        log.debug("authorization: {}", authorization);
 
-        //header가 없거나 header의 형식이 안맞을 때
-        if (header == null || !header.startsWith("Bearer ")) {
+        //authorization가 없거나 authorization의 형식이 안맞을 때
+        if (authorization == null || !authorization.startsWith("Bearer ")) {
+            request.setAttribute("invalidTokenException", ErrorCode.INVALID_TOKEN); // customauthenticationentrypoint까지 넘어가서 에러코드반환하기
             //다음으로 넘어가지 말고 바로 필터 종료
             filterChain.doFilter(request, response);
             return;
         }
 
         //token 꺼내기
-        String token;
-        try {
-            token = header.split(" ")[1];
-        } catch (Exception e) {
-            filterChain.doFilter(request, response);
-            return;
-        }
+        String token = authorization.split(" ")[1];
 
         //token 만료여부 확인
-        if (JwtTokenUtil.isExpired(token, secretKey)){
+        if (JwtUtil.isExpired(token, secretKey)){
+            log.error("token 사용시간이 만료되었습니다.");
             filterChain.doFilter(request, response);
             return;
         }
 
-        String userName = JwtTokenUtil.openToken(token, secretKey).get("userName").toString();
+        //token에서 userName 꺼내기
+        String userName = JwtUtil.getUserName(token, secretKey);
+        log.debug("userName : {} ", userName);
 
-        //userDetail 설정
-        User user = userService.getUserByUserName(userName);
-        log.debug("userRole: {}", user.getRole());
 
         //문열어주기
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(userName, null, List.of(new SimpleGrantedAuthority(user.getRole().name())));
+                new UsernamePasswordAuthenticationToken(userName, null, List.of(new SimpleGrantedAuthority("User")));
 
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

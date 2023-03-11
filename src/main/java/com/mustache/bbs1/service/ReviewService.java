@@ -2,6 +2,8 @@ package com.mustache.bbs1.service;
 
 import com.mustache.bbs1.domain.dto.review.ReviewCreateRequest;
 import com.mustache.bbs1.domain.dto.review.ReviewCreateResponse;
+import com.mustache.bbs1.domain.dto.review.ReviewModifyRequest;
+import com.mustache.bbs1.domain.dto.review.ReviewModifyResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewResponse;
 import com.mustache.bbs1.domain.entity.Hospital;
 import com.mustache.bbs1.domain.entity.Review;
@@ -15,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +37,7 @@ public class ReviewService {
 //    }
 
     //리뷰 등록
+    @Transactional
     public ReviewCreateResponse create(ReviewCreateRequest reviewCreateRequest, Long hospitalId, String userName) {
         //userName이 존재하지 않으면 예외 발생
         User user = userRepository.findByUserName(userName)
@@ -50,4 +54,38 @@ public class ReviewService {
 
         return ReviewCreateResponse.toResponse(message, savedReview);
     }
+
+    //리뷰 수정
+    @Transactional
+	public ReviewModifyResponse modify(ReviewModifyRequest reviewModifyRequest, Long hospitalId, Long reviewId, String userName) {
+        //userName이 존재하지 않으면 예외 발생
+        User user = userRepository.findByUserName(userName)
+                .orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND,
+                        ErrorCode.USERNAME_NOT_FOUND.getMessage()));
+
+        //병원이 존재하지 않으면 예외 발생
+        Hospital hospital = hospitalRepository.findById(hospitalId)
+                .orElseThrow(() -> new AppException(ErrorCode.HOSPITAL_NOT_FOUND, ErrorCode.HOSPITAL_NOT_FOUND.getMessage()));
+
+        //리뷰가 존재하지 않으면 예외 발생
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new AppException(ErrorCode.REVIEW_NOT_FOUND,
+                        ErrorCode.REVIEW_NOT_FOUND.getMessage()));
+
+        //로그인유저 != 일정작성유저일 경우 예외발생
+        Long loginUserId = user.getId();
+        Long reviewWriteUserId = review.getUser().getId();
+
+        if (!loginUserId.equals(reviewWriteUserId)) {
+            throw new AppException(ErrorCode.INVALID_PERMISSION, ErrorCode.INVALID_PERMISSION.getMessage());
+        }
+
+        //수정된 리뷰 저장
+        review.changeToReview(reviewModifyRequest);
+        Review modifyReview = reviewRepository.saveAndFlush(review);
+
+        return ReviewModifyResponse.toResponse(modifyReview);
+
+	}
+
 }

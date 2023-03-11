@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ReviewCreateResponse {
     private String msg;
+
     private Long id;
 
     public static ReviewCreateResponse toResponse(String message, Review savedReview) {

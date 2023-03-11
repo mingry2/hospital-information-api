@@ -6,7 +6,7 @@ import com.mustache.bbs1.domain.entity.User;
 import com.mustache.bbs1.exception.AppException;
 import com.mustache.bbs1.exception.ErrorCode;
 import com.mustache.bbs1.repository.UserRepository;
-import com.mustache.bbs1.utils.JwtTokenUtil;
+import com.mustache.bbs1.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -60,15 +60,9 @@ public class UserService {
 		}
 
 		//로그인 성공 -> token 발급
-		String token = JwtTokenUtil.createToken(user.getUserName(), secretKey, expiredTimeMs);
+		String token = JwtUtil.createToken(user.getUserName(), secretKey, expiredTimeMs);
 
 		return token;
 	}
 
-	//UserDetail 설정
-	public User getUserByUserName(String userName) {
-		//userName이 존재하지 않으면 예외 발생
-		return userRepository.findByUserName(userName)
-				.orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND, ErrorCode.USERNAME_NOT_FOUND.getMessage()));
-	}
 }

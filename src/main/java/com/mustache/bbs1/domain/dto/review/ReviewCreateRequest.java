@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @EqualsAndHashCode
 public class ReviewCreateRequest {
-    private Long hospitalId;
     private String disease;
     private float amount;
     private String title;
