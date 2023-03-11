@@ -6,8 +6,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 public class EncrypterConfiguration { //비밀번호 암호화
+
 	@Bean
-	public BCryptPasswordEncoder encodePwd(){
+	public BCryptPasswordEncoder encodePwd() {
 		return new BCryptPasswordEncoder();
 	}
 

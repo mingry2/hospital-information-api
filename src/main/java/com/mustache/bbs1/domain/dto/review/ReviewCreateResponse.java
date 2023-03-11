@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ReviewCreateResponse {
 
-    private Long id;
+	private Long id;
 
-    private String msg;
+	private String msg;
 
-    public static ReviewCreateResponse toResponse(String message, Review savedReview) {
-        return ReviewCreateResponse.builder()
-                .msg(message)
-                .id(savedReview.getId())
-                .build();
-    }
+	public static ReviewCreateResponse toResponse(String message, Review savedReview) {
+		return ReviewCreateResponse.builder()
+				.msg(message)
+				.id(savedReview.getId())
+				.build();
+	}
 }

@@ -13,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReviewListResponse {
+
 	private Long id;
 
 	private String hospitalName;

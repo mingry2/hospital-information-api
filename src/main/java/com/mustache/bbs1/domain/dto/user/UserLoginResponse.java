@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 public class UserLoginResponse {
+
 	private String jwt;
 
 }

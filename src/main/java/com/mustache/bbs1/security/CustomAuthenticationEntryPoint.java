@@ -1,4 +1,4 @@
-package com.mustache.bbs1.configuration;
+package com.mustache.bbs1.security;
 
 import com.mustache.bbs1.exception.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +13,13 @@ import java.io.IOException;
 @Component
 @Slf4j
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
-	@Override
-	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
-		ErrorCode exception = (ErrorCode)request.getAttribute("invalidTokenException");
 
-		if(exception.equals(ErrorCode.INVALID_TOKEN)) {
+	@Override
+	public void commence(HttpServletRequest request, HttpServletResponse response,
+			AuthenticationException authException) throws IOException {
+		ErrorCode exception = (ErrorCode) request.getAttribute("invalidTokenException");
+
+		if (exception.equals(ErrorCode.INVALID_TOKEN)) {
 			setResponse(response, ErrorCode.INVALID_TOKEN);
 		}
 	}

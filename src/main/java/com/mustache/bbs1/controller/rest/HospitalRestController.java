@@ -21,23 +21,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class HospitalRestController {
 
-    private final HospitalService hospitalService;
+	private final HospitalService hospitalService;
 
-    //병원 정보 상세 조회(단건)
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Response<HospitalResponse>> getHospital(@PathVariable Long id){
-        HospitalResponse hospitalResponse = hospitalService.get(id);
+	//병원 정보 상세 조회(단건)
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Response<HospitalResponse>> getHospital(@PathVariable Long id) {
+		HospitalResponse hospitalResponse = hospitalService.get(id);
 
-        return ResponseEntity.ok().body(Response.success(hospitalResponse));
-    }
+		return ResponseEntity.ok().body(Response.success(hospitalResponse));
+	}
 
-    //병원 정보 전체 조회
-    @GetMapping(value = "/list")
-    public ResponseEntity<Response<Page<HospitalListResponse>>> listHospital(
-            @PageableDefault(size = 20) @SortDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<HospitalListResponse> hospitalListResponse = hospitalService.list(pageable);
+	//병원 정보 전체 조회
+	@GetMapping(value = "/list")
+	public ResponseEntity<Response<Page<HospitalListResponse>>> listHospital(
+			@PageableDefault(size = 20) @SortDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<HospitalListResponse> hospitalListResponse = hospitalService.list(pageable);
 
-        return ResponseEntity.ok().body(Response.success(hospitalListResponse));
-    }
+		return ResponseEntity.ok().body(Response.success(hospitalListResponse));
+	}
 
 }

@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserRestController {
 
 	private final UserService userService;
-	private final UserRepository userRepository;
 
 	@PostMapping(value = "join")
-	public ResponseEntity<Response<UserJoinResponse>> join(@RequestBody UserJoinRequest userJoinRequest) {
+	public ResponseEntity<Response<UserJoinResponse>> join(
+			@RequestBody UserJoinRequest userJoinRequest) {
 		UserJoinResponse userJoinResponse = userService.join(userJoinRequest);
 
 		return ResponseEntity.created(URI.create("api/v1/users" + userJoinResponse.getId())).body(

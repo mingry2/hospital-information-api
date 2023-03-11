@@ -20,12 +20,12 @@ public class UserService {
 
 	private final BCryptPasswordEncoder encoder;
 
-	/**
-	 * token 설정
-	 **/
+	/** token 설정 **/
+
 	@Value("${jwt.token.secret}")
 	private String secretKey;
 
+	//token 만료 시간 설정
 	private Long expiredTimeMs = 1 * 1000 * 60 * 60L * 24; // 하루
 //	private Long expiredTimeMs = 1000 * 60 * 60L; // 1시간
 

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 public class ReviewModifyRequest {
+
 	private String disease;
 
 	private float amount;

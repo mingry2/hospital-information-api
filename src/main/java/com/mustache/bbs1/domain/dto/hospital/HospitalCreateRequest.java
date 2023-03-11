@@ -8,13 +8,13 @@ import lombok.Getter;
 @AllArgsConstructor
 public class HospitalCreateRequest {
 
-    private Long id;
-    private String roadNameAddress;
-    private String hospitalName;
+	private Long id;
+	private String roadNameAddress;
+	private String hospitalName;
 
 
-    public Hospital toEntity(){
-        return new Hospital(this.id, this.roadNameAddress, this.hospitalName);
-    }
+	public Hospital toEntity() {
+		return new Hospital(this.id, this.roadNameAddress, this.hospitalName);
+	}
 
 }

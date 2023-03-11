@@ -14,6 +14,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Builder
 @Getter
 public class ReviewModifyResponse {
+
 	private Long id;
 
 	private String title;

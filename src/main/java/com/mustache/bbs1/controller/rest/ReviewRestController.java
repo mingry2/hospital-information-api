@@ -38,10 +38,10 @@ public class ReviewRestController {
 	public ResponseEntity<Response<ReviewCreateResponse>> createReview(
 			@RequestBody ReviewCreateRequest reviewCreateRequest, @PathVariable Long hospitalId,
 			Authentication authentication) {
-		log.debug("authentication.getName : {} , hospitalId : {} ", authentication.getName(), hospitalId);
+		log.debug("authentication.getName : {} , hospitalId : {} ", authentication.getName(),
+				hospitalId);
 		ReviewCreateResponse reviewCreateResponse = reviewService.create(reviewCreateRequest,
 				hospitalId, authentication.getName());
-
 
 		return ResponseEntity.created(URI.create("api/v1/reviews" + reviewCreateResponse.getId()))
 				.body(Response.success(reviewCreateResponse));
@@ -61,19 +61,23 @@ public class ReviewRestController {
 
 	//리뷰 삭제
 	@DeleteMapping(value = "/hospitals/{hospitalId}/reviews/{reviewId}")
-	public ResponseEntity<Response<ReviewDeleteResponse>> deleteReview(@PathVariable Long hospitalId, @PathVariable Long reviewId, Authentication authentication) {
-		ReviewDeleteResponse reviewDeleteResponse = reviewService.delete(hospitalId, reviewId, authentication.getName());
+	public ResponseEntity<Response<ReviewDeleteResponse>> deleteReview(
+			@PathVariable Long hospitalId, @PathVariable Long reviewId,
+			Authentication authentication) {
+		ReviewDeleteResponse reviewDeleteResponse = reviewService.delete(hospitalId, reviewId,
+				authentication.getName());
 
 		return ResponseEntity.ok().body(Response.success(reviewDeleteResponse));
 	}
 
-    //리뷰 상세 조회(단건)
-    @GetMapping(value = "/hospitals/{hospitalId}/reviews/{reviewId}")
-    public ResponseEntity<Response<ReviewResponse>> getReview(@PathVariable Long hospitalId, @PathVariable Long reviewId){
-        ReviewResponse reviewResponse = reviewService.get(hospitalId, reviewId);
+	//리뷰 상세 조회(단건)
+	@GetMapping(value = "/hospitals/{hospitalId}/reviews/{reviewId}")
+	public ResponseEntity<Response<ReviewResponse>> getReview(@PathVariable Long hospitalId,
+			@PathVariable Long reviewId) {
+		ReviewResponse reviewResponse = reviewService.get(hospitalId, reviewId);
 
-        return ResponseEntity.ok().body(Response.success(reviewResponse));
-    }
+		return ResponseEntity.ok().body(Response.success(reviewResponse));
+	}
 
 	//리뷰 전체 조회
 	@GetMapping(value = "/hospitals/{hospitalId}/reviews")

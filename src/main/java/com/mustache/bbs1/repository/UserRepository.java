@@ -3,7 +3,10 @@ package com.mustache.bbs1.repository;
 import com.mustache.bbs1.domain.entity.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByUserName(String userName);
+
+	Optional<User> findByUserName(String userName);
 }

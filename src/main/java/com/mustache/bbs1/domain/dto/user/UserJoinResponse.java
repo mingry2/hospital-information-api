@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 public class UserJoinResponse {
+
 	private Long id;
 	private String userName;
 

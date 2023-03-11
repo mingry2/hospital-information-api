@@ -15,10 +15,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @EqualsAndHashCode
 public class ReviewCreateRequest {
-    private String disease;
-    private float amount;
-    private String title;
-    private String content;
+
+	private String disease;
+	private float amount;
+	private String title;
+	private String content;
 
 	public Review toEntity(User user, Hospital hospital) {
 		return Review.builder()

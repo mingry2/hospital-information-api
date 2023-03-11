@@ -18,26 +18,27 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 public class BaseEntity {
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
 
-    @LastModifiedDate
-    private LocalDateTime lastModifiedAt;
+	@CreatedDate
+	@Column(updatable = false)
+	private LocalDateTime createdAt;
 
-    @Getter(value = AccessLevel.PROTECTED)
-    @Column(columnDefinition = "datetime null default null")
-    private LocalDateTime deletedAt;
+	@LastModifiedDate
+	private LocalDateTime lastModifiedAt;
 
-    public void deleteSoftly() {
-        this.deletedAt = LocalDateTime.now();
-    }
+	@Getter(value = AccessLevel.PROTECTED)
+	@Column(columnDefinition = "datetime null default null")
+	private LocalDateTime deletedAt;
 
-    public boolean isDeleted() {
-        return null != deletedAt;
-    }
+	public void deleteSoftly() {
+		this.deletedAt = LocalDateTime.now();
+	}
 
-    public void undoDeletion() {
-        this.deletedAt = null;
-    }
+	public boolean isDeleted() {
+		return null != deletedAt;
+	}
+
+	public void undoDeletion() {
+		this.deletedAt = null;
+	}
 }

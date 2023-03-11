@@ -9,14 +9,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class Response<T> {
+
 	private String resultCode;
 	private T result;
 
-	public static Response<ErrorResponse> error(ErrorResponse errorResponse){
+	public static Response<ErrorResponse> error(ErrorResponse errorResponse) {
 		return new Response<>("ERROR", errorResponse);
 	}
 
-	public static <T> Response<T> success(T result){
+	public static <T> Response<T> success(T result) {
 		return new Response<>("SUCCESS", result);
 	}
 }
