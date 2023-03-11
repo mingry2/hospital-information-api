@@ -1,15 +1,23 @@
 package com.mustache.bbs1.controller.rest;
 
 import com.mustache.bbs1.domain.Response;
+import com.mustache.bbs1.domain.dto.hospital.HospitalListResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewDeleteResponse;
+import com.mustache.bbs1.domain.dto.review.ReviewListResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewModifyRequest;
 import com.mustache.bbs1.domain.dto.review.ReviewModifyResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewCreateRequest;
 import com.mustache.bbs1.domain.dto.review.ReviewCreateResponse;
+import com.mustache.bbs1.domain.dto.review.ReviewResponse;
 import com.mustache.bbs1.service.ReviewService;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -49,7 +57,6 @@ public class ReviewRestController {
 
 		return ResponseEntity.created(URI.create("api/v1/reviews" + reviewModifyResponse.getId()))
 				.body(Response.success(reviewModifyResponse));
-
 	}
 
 	//리뷰 삭제
@@ -60,11 +67,21 @@ public class ReviewRestController {
 		return ResponseEntity.ok().body(Response.success(reviewDeleteResponse));
 	}
 
-//    //리뷰 상세 조회(단건)
-//    @GetMapping(value = "/{id}")
-//    public ResponseEntity<Response<ReviewResponse>> getReview(@PathVariable Long id, @AuthenticationPrincipal UserDetails user){
-//        ReviewResponse reviewResponse = reviewService.get(id, user.getUsername());
-//
-//        return ResponseEntity.ok().body(Response.success(reviewResponse));
-//    }
+    //리뷰 상세 조회(단건)
+    @GetMapping(value = "/hospitals/{hospitalId}/reviews/{reviewId}")
+    public ResponseEntity<Response<ReviewResponse>> getReview(@PathVariable Long hospitalId, @PathVariable Long reviewId){
+        ReviewResponse reviewResponse = reviewService.get(hospitalId, reviewId);
+
+        return ResponseEntity.ok().body(Response.success(reviewResponse));
+    }
+
+	//리뷰 전체 조회
+	@GetMapping(value = "/hospitals/{hospitalId}/reviews")
+	public ResponseEntity<Response<Page<ReviewListResponse>>> listReview(
+			@PageableDefault(size = 20) @SortDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<ReviewListResponse> reviewListResponses = reviewService.list(pageable);
+
+		return ResponseEntity.ok().body(Response.success(reviewListResponses));
+	}
+
 }

@@ -1,8 +1,10 @@
 package com.mustache.bbs1.service;
 
+import com.mustache.bbs1.domain.dto.hospital.HospitalListResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewCreateRequest;
 import com.mustache.bbs1.domain.dto.review.ReviewCreateResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewDeleteResponse;
+import com.mustache.bbs1.domain.dto.review.ReviewListResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewModifyRequest;
 import com.mustache.bbs1.domain.dto.review.ReviewModifyResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewResponse;
@@ -15,9 +17,9 @@ import com.mustache.bbs1.repository.HospitalRepository;
 import com.mustache.bbs1.repository.ReviewRepository;
 import com.mustache.bbs1.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -29,13 +31,6 @@ public class ReviewService {
     private final HospitalRepository hospitalRepository;
 
     private final ReviewRepository reviewRepository;
-
-//    //리뷰 상세 조회(단건)
-//    public ReviewResponse get(Long id, String userName) {
-//        Optional<Review> review = reviewRepository.findById(id);
-//
-//        return ReviewResponse.from(review);
-//    }
 
     //리뷰 등록
     @Transactional
@@ -121,4 +116,24 @@ public class ReviewService {
         return ReviewDeleteResponse.toResponse(review.getId(), message);
     }
 
+    //리뷰 상세 조회(단건)
+    public ReviewResponse get(Long hospitalId, Long reviewId) {
+        //병원이 존재하지 않으면 예외 발생
+        Hospital hospital = hospitalRepository.findById(hospitalId)
+                .orElseThrow(() -> new AppException(ErrorCode.HOSPITAL_NOT_FOUND, ErrorCode.HOSPITAL_NOT_FOUND.getMessage()));
+
+        //리뷰가 존재하지 않으면 예외 발생
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new AppException(ErrorCode.REVIEW_NOT_FOUND,
+                        ErrorCode.REVIEW_NOT_FOUND.getMessage()));
+
+        return ReviewResponse.toResponse(hospital, review);
+    }
+
+    //리뷰 전체 조회
+    public Page<ReviewListResponse> list(Pageable pageable) {
+        Page<Review> reviews = reviewRepository.findAll(pageable);
+
+        return reviews.map(r -> ReviewListResponse.toResponse(r));
+    }
 }

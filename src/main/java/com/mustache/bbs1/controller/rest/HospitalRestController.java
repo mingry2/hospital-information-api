@@ -38,7 +38,6 @@ public class HospitalRestController {
         Page<HospitalListResponse> hospitalListResponse = hospitalService.list(pageable);
 
         return ResponseEntity.ok().body(Response.success(hospitalListResponse));
-
     }
 
 }

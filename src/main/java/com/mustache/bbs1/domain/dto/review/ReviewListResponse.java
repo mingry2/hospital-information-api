@@ -1,24 +1,21 @@
 package com.mustache.bbs1.domain.dto.review;
 
-import com.mustache.bbs1.domain.entity.Hospital;
 import com.mustache.bbs1.domain.entity.Review;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Getter
-public class ReviewResponse {
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class ReviewListResponse {
 	private Long id;
 
 	private String hospitalName;
-
-	private String disease;
-
-	private float amount;
 
 	private String title;
 
@@ -26,12 +23,10 @@ public class ReviewResponse {
 
 	private String userName;
 
-	public static ReviewResponse toResponse(Hospital hospital, Review review) {
-		return ReviewResponse.builder()
+	public static ReviewListResponse toResponse(Review review) {
+		return ReviewListResponse.builder()
 				.id(review.getId())
-				.hospitalName(hospital.getHospitalName())
-				.disease(review.getDisease())
-				.amount(review.getAmount())
+				.hospitalName(review.getHospital().getHospitalName())
 				.title(review.getTitle())
 				.content(review.getContent())
 				.userName(review.getUser().getUserName())
