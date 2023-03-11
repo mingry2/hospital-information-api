@@ -2,6 +2,7 @@ package com.mustache.bbs1.service;
 
 import com.mustache.bbs1.domain.dto.review.ReviewCreateRequest;
 import com.mustache.bbs1.domain.dto.review.ReviewCreateResponse;
+import com.mustache.bbs1.domain.dto.review.ReviewDeleteResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewModifyRequest;
 import com.mustache.bbs1.domain.dto.review.ReviewModifyResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewResponse;
@@ -87,5 +88,37 @@ public class ReviewService {
         return ReviewModifyResponse.toResponse(modifyReview);
 
 	}
+
+    @Transactional
+    public ReviewDeleteResponse delete(Long hospitalId, Long reviewId, String userName) {
+        //userName이 존재하지 않으면 예외 발생
+        User user = userRepository.findByUserName(userName)
+                .orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND,
+                        ErrorCode.USERNAME_NOT_FOUND.getMessage()));
+
+        //병원이 존재하지 않으면 예외 발생
+        Hospital hospital = hospitalRepository.findById(hospitalId)
+                .orElseThrow(() -> new AppException(ErrorCode.HOSPITAL_NOT_FOUND, ErrorCode.HOSPITAL_NOT_FOUND.getMessage()));
+
+        //리뷰가 존재하지 않으면 예외 발생
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new AppException(ErrorCode.REVIEW_NOT_FOUND,
+                        ErrorCode.REVIEW_NOT_FOUND.getMessage()));
+
+        //로그인유저 != 일정작성유저일 경우 예외발생
+        Long loginUserId = user.getId();
+        Long reviewWriteUserId = review.getUser().getId();
+
+        if (!loginUserId.equals(reviewWriteUserId)) {
+            throw new AppException(ErrorCode.INVALID_PERMISSION, ErrorCode.INVALID_PERMISSION.getMessage());
+        }
+
+        //리뷰 삭제
+        review.deleteSoftly();
+
+        String message = "리뷰가 삭제되었습니다.";
+
+        return ReviewDeleteResponse.toResponse(review.getId(), message);
+    }
 
 }

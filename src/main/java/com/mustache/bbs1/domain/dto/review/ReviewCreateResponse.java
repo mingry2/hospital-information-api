@@ -11,9 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 public class ReviewCreateResponse {
-    private String msg;
 
     private Long id;
+
+    private String msg;
 
     public static ReviewCreateResponse toResponse(String message, Review savedReview) {
         return ReviewCreateResponse.builder()

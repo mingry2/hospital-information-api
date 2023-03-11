@@ -1,6 +1,7 @@
 package com.mustache.bbs1.controller.rest;
 
 import com.mustache.bbs1.domain.Response;
+import com.mustache.bbs1.domain.dto.review.ReviewDeleteResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewModifyRequest;
 import com.mustache.bbs1.domain.dto.review.ReviewModifyResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewCreateRequest;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,6 +50,14 @@ public class ReviewRestController {
 		return ResponseEntity.created(URI.create("api/v1/reviews" + reviewModifyResponse.getId()))
 				.body(Response.success(reviewModifyResponse));
 
+	}
+
+	//리뷰 삭제
+	@DeleteMapping(value = "/hospitals/{hospitalId}/reviews/{reviewId}")
+	public ResponseEntity<Response<ReviewDeleteResponse>> deleteReview(@PathVariable Long hospitalId, @PathVariable Long reviewId, Authentication authentication) {
+		ReviewDeleteResponse reviewDeleteResponse = reviewService.delete(hospitalId, reviewId, authentication.getName());
+
+		return ResponseEntity.ok().body(Response.success(reviewDeleteResponse));
 	}
 
 //    //리뷰 상세 조회(단건)
