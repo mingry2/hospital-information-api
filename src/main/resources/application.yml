@@ -15,3 +15,7 @@ spring:
 logging:
   level:
     com: debug
+server:
+  servlet:
+    encoding:
+      force: true

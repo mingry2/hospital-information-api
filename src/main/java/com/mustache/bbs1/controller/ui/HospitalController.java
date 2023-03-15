@@ -3,6 +3,7 @@ package com.mustache.bbs1.controller.ui;
 import com.mustache.bbs1.domain.dto.hospital.HospitalCreateRequest;
 import com.mustache.bbs1.domain.entity.Hospital;
 import com.mustache.bbs1.repository.HospitalRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,43 +17,28 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/hospitals")
+@RequiredArgsConstructor
 @Slf4j
 public class HospitalController {
 
 	private final HospitalRepository hospitalRepository;
 
-	public HospitalController(HospitalRepository hospitalRepository) {
-		this.hospitalRepository = hospitalRepository;
-	}
-
-	// 새 글작성 페이지
-	@GetMapping("/new")
-	public String createHospital() {
-		return "hospitals/new";
-	}
-
-	// 게시글 찾는 페이지
-	@GetMapping("/{id}")
-	public String findById(@PathVariable Integer id, Model model) {
-		Optional<Hospital> optionalHospital = hospitalRepository.findById(id);
+	//병,의원 정보 상세 조회(단건)
+	@GetMapping("/{hospitalId}")
+	public String findById(@PathVariable Long hospitalId, Model model) {
+		Optional<Hospital> optionalHospital = hospitalRepository.findById(hospitalId);
 
 		if (!optionalHospital.isEmpty()) {
 			model.addAttribute("hospital", optionalHospital.get());
 			return "hospitals/show";
 		} else {
-			model.addAttribute("message", String.format("%d번을 찾을 수 없습니다!", id));
+			model.addAttribute("message", String.format("%d번을 찾을 수 없습니다!", hospitalId));
 			return "hospitals/error";
 		}
+
 	}
 
-	// new에서 입력한 데이터 DB로 담아오는 메서드
-	@PostMapping("/posts")
-	public String createHospital(HospitalCreateRequest hospitalCreateRequest) {
-		Hospital savedHospital = hospitalRepository.save(hospitalCreateRequest.toEntity());
-		return String.format("redirect:/hospitals/%d", savedHospital.getId());
-	}
-
-	// 모든 게시글 테이블 리스트로 보는 페이지
+	//병,의원 정보를 전체 조회
 	@GetMapping("")
 	public String list(@PageableDefault(size = 10, sort = "id") Pageable pageable, Model model) {
 		Page<Hospital> hospitals = hospitalRepository.findAll(pageable);
@@ -63,13 +49,13 @@ public class HospitalController {
 		return "hospitals/list";
 	}
 
-	// home 페이지
+	//home 페이지
 	@GetMapping("/home")
 	public String homeHospital() {
 		return "hospitals/home";
 	}
 
-	// id의 게시글 수정하는 페이지
+	//리뷰 수정 페이지
 	@GetMapping("/{id}/edit")
 	public String editHospital(@PathVariable Integer id, Model model) {
 		Optional<Hospital> optionalHospital = hospitalRepository.findById(id);
@@ -84,24 +70,26 @@ public class HospitalController {
 		}
 	}
 
-	// edit 한 데이터 update해서 db에 넣는 메서드
+	//수정한 데이터 DB에 넣는 페이지
 	@PostMapping("/{id}/update")
-	public String updateHospital(@PathVariable Integer id, HospitalCreateRequest hospitalCreateRequest, Model model) {
+	public String updateHospital(@PathVariable Integer id,
+			HospitalCreateRequest hospitalCreateRequest, Model model) {
 		log.info("id:{} hospitalName:{} loadNameAddress:{}", hospitalCreateRequest.getId(),
-				hospitalCreateRequest.getHospitalName(), hospitalCreateRequest.getRoadNameAddress());
+				hospitalCreateRequest.getHospitalName(),
+				hospitalCreateRequest.getRoadNameAddress());
 		Hospital savedHospital = hospitalRepository.save(hospitalCreateRequest.toEntity());
 		model.addAttribute("hospital", savedHospital);
 		return String.format("redirect:/hospitals/%d", id);
 	}
 
-	// id 게시글 삭제
+	//리뷰 삭제 페이지
 	@GetMapping("/{id}/delete")
 	public String deleteHospital(@PathVariable Integer id) {
 		hospitalRepository.deleteById(id);
 		return "redirect:/hospitals/";
 	}
 
-	// 특정 키워드로 검색기능 추가
+	//특정 키워드로 검색
 	@GetMapping("/search")
 	public String search(@RequestParam String keyword, Pageable pageable, Model model) {
 		log.info("keyword: {}", keyword);

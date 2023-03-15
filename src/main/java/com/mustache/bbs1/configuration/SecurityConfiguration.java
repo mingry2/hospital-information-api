@@ -42,7 +42,7 @@ public class SecurityConfiguration {
 				.exceptionHandling()
 				.authenticationEntryPoint(new CustomAuthenticationEntryPoint())
 				.and()
-				.addFilterBefore(new JwtFilter(userService, secretKey),
+				.addFilterBefore(new JwtFilter(secretKey),
 						UsernamePasswordAuthenticationFilter.class) //UserNamePasswordAuthenticationFilter적용하기 전에 JWTTokenFilter를 적용 하라는 뜻 입니다.
 				.build();
 	}
