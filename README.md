@@ -7,8 +7,6 @@
 ![](img/전국병의원정보API_content.png)
 </div>
 
----
-
 # 📌 Tech stack
 
 ![](img/back_end.png)     
