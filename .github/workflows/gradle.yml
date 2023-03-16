@@ -40,3 +40,14 @@ jobs:
         docker build -t $REPO .
         docker tag $REPO:latest $NAME/$REPO:latest
         docker push $NAME/$REPO:latest
+  
+  # 배포 스크립트 작성
+  deploy:
+    needs: build
+    name: Deploy
+    runs-on: [ self-hosted, label-development ]
+    steps:
+      - name: Docker run
+        run: |
+              docker ps -q --filter "name=hospital-information-api" | grep -q . && docker stop "hospital-information-api" && docker rmi  "minry20415/hospital-information-api"
+              docker run -d --name hospital-information-api --rm -p 8080:8081 minry20415/hospital-information-api
