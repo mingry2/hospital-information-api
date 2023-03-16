@@ -49,5 +49,6 @@ jobs:
     steps:
       - name: Docker run
         run: |
-              sudo docker ps -q --filter "name=minry20415/hospital-information-api" | grep -q . && sudo docker stop "hospital-information-api" && sudo docker rmi  "minry20415/hospital-information-api"
-              sudo docker run -d --name minry20415/hospital-information-api --rm -p 8080:8081 minry20415/hospital-information-api
+              docker ps -q --filter "hospital-information-api" | grep -q . && docker stop "hospital-information-api" && docker rmi  "minry20415/hospital-information-api"
+              docker pull minry20415/hospital-information-api:latest
+              docker run -d --name hospital-information-api --rm -p 8080:8081 minry20415/hospital-information-api:latest
