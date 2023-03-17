@@ -9,8 +9,7 @@
 
 ---
 
-# 📌 Tech stack
-
+## 📌 Tech stack
 ![](img/back_end.png)     
 ![](img/infra.png)    
 ![](img/tools.png)    
