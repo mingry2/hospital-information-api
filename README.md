@@ -6,8 +6,6 @@
 <a href="http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/home"><img src="https://img.shields.io/badge/release-83B81A?style=flat&logo=Google Chrome&logoColor=white" /></a>
 </div>
 
----
-
 # 🏥 소개    
 - 전국 병/의원의 병원명, 병원주소, 입원실수 등 상세 정보를 검색하여 찾을 수 있다.
 - 원하는 지역명을 키워드로 검색하여 해당 지역의 병/의원만 조회할 수 있다.
@@ -19,7 +17,7 @@
   - Spring Security를 사용하여 회원가입/로그인 기능 추가
   - 회원가입 시 userName 중복 여부 확인하여 중복일 경우 에러 처리
   - 회원가입 시 password 암호화로 DB에 저장
-  - 로그인 시 userName, password 에러 처리
+  - 로그인 시 userName, password가 다르면 에러 처리
 - `리뷰 등록,수정,삭제,조회`
   - 등록,수정,삭제는 로그인한 회원만 가능
   - 리뷰 작성 회원만 수정,삭제 가능 아닐 경우 에러 처리
