@@ -5,6 +5,8 @@
 <a href="http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/swagger-ui/" target="_blank"><img src="https://img.shields.io/badge/swagger-4285F4?style=flat&logo=Google Chrome&logoColor=white" /></a>
 [<img src="https://img.shields.io/badge/release-v1.0-critical?style=flat&logo=google-chrome&logoColor=white" />](http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/)
 
+</div>
+
 # 🏥 소개    
 - 전국 병/의원의 병원명, 병원주소, 입원실수 등 상세 정보를 검색하여 찾을 수 있다.
 - 원하는 지역명을 키워드로 검색하여 해당 지역의 병/의원만 조회할 수 있다.
