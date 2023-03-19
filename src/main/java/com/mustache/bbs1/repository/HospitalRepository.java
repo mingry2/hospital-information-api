@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HospitalRepository extends JpaRepository<Hospital, Integer> {
-
 	Optional<Hospital> findById(Long hospitalId);
 
 	Page<Hospital> findByRoadNameAddressContaining(String keyword,

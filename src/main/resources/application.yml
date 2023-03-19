@@ -12,10 +12,17 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
 logging:
   level:
     com: debug
+
+#한글깨짐에러해결
 server:
   servlet:
     encoding:
       force: true
+
+jwt:
+  token:
+    secret: secret
