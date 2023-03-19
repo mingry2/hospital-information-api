@@ -22,8 +22,10 @@
 - AWS EC2 인스턴스를 생성하여 배포서버로 사용
 - docker를 설치하여 springboot 프로젝트를 컨테이너로 띄워 배포
 - 메모리 및 용량 문제로 DB는 다른 EC2 인스턴스를 생성하여 mySQL DB 사용
-- 저장소는 GitHub를 사용하고, docker hub에 빌드된 이미지를 push하고 인스턴스에서 이미지를 pull 받아와 컨테이너로 띄움
-- gradle build + docker run 모두 github actions를 사용
+- 저장소는 GitHub를 사용하고, docker hub에 빌드된 이미지를 push하고 
+  인스턴스에서 이미지를 pull 받아와 컨테이너로 띄움
+- gradle build + docker run 모두 github actions를 사용    
+
 
 # ⚙ 기능
 - `회원가입/로그인`
@@ -41,7 +43,7 @@
 - `지역별 병/의원 조회`
   - JPA 키워드 검색을 추가하여 지역별로 병/의원 조회 가능
 
-# 📌 front-end & stack
+# 📌 tech stack
 ## back end
 ![](img/skill1.png)
 ## tool
