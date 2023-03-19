@@ -3,8 +3,7 @@
 ![](img/전국병의원정보API_title.png)    
 
 <a href="http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/swagger-ui/" target="_blank"><img src="https://img.shields.io/badge/swagger-4285F4?style=flat&logo=Google Chrome&logoColor=white" /></a>
-<a href="http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/" target="_blank"><img src="https://img.shields.io/badge/release-83B81A?style=flat&logo=Google Chrome&logoColor=white" /></a>
-</div>
+[<img src="https://img.shields.io/badge/release-v1.0-critical?style=flat&logo=google-chrome&logoColor=white" />](http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/)
 
 # 🏥 소개    
 - 전국 병/의원의 병원명, 병원주소, 입원실수 등 상세 정보를 검색하여 찾을 수 있다.
