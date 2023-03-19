@@ -1,7 +1,6 @@
 package com.mustache.bbs1.controller.rest;
 
 import com.mustache.bbs1.domain.Response;
-import com.mustache.bbs1.domain.dto.hospital.HospitalListResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewDeleteResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewListResponse;
 import com.mustache.bbs1.domain.dto.review.ReviewModifyRequest;
@@ -20,13 +19,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.parameters.P;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping(value = "/api/v1/reviews")
 @RequiredArgsConstructor
 @Slf4j
 public class ReviewRestController {
@@ -34,53 +30,48 @@ public class ReviewRestController {
 	private final ReviewService reviewService;
 
 	//리뷰 등록
-	@PostMapping(value = "/hospitals/{hospitalId}/reviews")
+	@PostMapping(value = "/create")
 	public ResponseEntity<Response<ReviewCreateResponse>> createReview(
-			@RequestBody ReviewCreateRequest reviewCreateRequest, @PathVariable Long hospitalId,
-			Authentication authentication) {
-		log.debug("authentication.getName : {} , hospitalId : {} ", authentication.getName(),
-				hospitalId);
+			@RequestBody ReviewCreateRequest reviewCreateRequest, Authentication authentication) {
 		ReviewCreateResponse reviewCreateResponse = reviewService.create(reviewCreateRequest,
-				hospitalId, authentication.getName());
+				authentication.getName());
 
 		return ResponseEntity.created(URI.create("api/v1/reviews" + reviewCreateResponse.getId()))
 				.body(Response.success(reviewCreateResponse));
 	}
 
 	//리뷰 수정
-	@PutMapping(value = "/hospitals/{hospitalId}/reviews/{reviewId}")
+	@PutMapping(value = "/{reviewId}")
 	public ResponseEntity<Response<ReviewModifyResponse>> modifyReview(
-			@RequestBody ReviewModifyRequest reviewModifyRequest, @PathVariable Long hospitalId,
-			@PathVariable Long reviewId, Authentication authentication) {
+			@RequestBody ReviewModifyRequest reviewModifyRequest, @PathVariable Long reviewId,
+			Authentication authentication) {
 		ReviewModifyResponse reviewModifyResponse = reviewService.modify(reviewModifyRequest,
-				hospitalId, reviewId, authentication.getName());
+				reviewId, authentication.getName());
 
 		return ResponseEntity.created(URI.create("api/v1/reviews" + reviewModifyResponse.getId()))
 				.body(Response.success(reviewModifyResponse));
 	}
 
 	//리뷰 삭제
-	@DeleteMapping(value = "/hospitals/{hospitalId}/reviews/{reviewId}")
-	public ResponseEntity<Response<ReviewDeleteResponse>> deleteReview(
-			@PathVariable Long hospitalId, @PathVariable Long reviewId,
+	@DeleteMapping(value = "/{reviewId}")
+	public ResponseEntity<Response<ReviewDeleteResponse>> deleteReview(@PathVariable Long reviewId,
 			Authentication authentication) {
-		ReviewDeleteResponse reviewDeleteResponse = reviewService.delete(hospitalId, reviewId,
+		ReviewDeleteResponse reviewDeleteResponse = reviewService.delete(reviewId,
 				authentication.getName());
 
 		return ResponseEntity.ok().body(Response.success(reviewDeleteResponse));
 	}
 
 	//리뷰 상세 조회(단건)
-	@GetMapping(value = "/hospitals/{hospitalId}/reviews/{reviewId}")
-	public ResponseEntity<Response<ReviewResponse>> getReview(@PathVariable Long hospitalId,
-			@PathVariable Long reviewId) {
-		ReviewResponse reviewResponse = reviewService.get(hospitalId, reviewId);
+	@GetMapping(value = "/{reviewId}")
+	public ResponseEntity<Response<ReviewResponse>> getReview(@PathVariable Long reviewId) {
+		ReviewResponse reviewResponse = reviewService.get(reviewId);
 
 		return ResponseEntity.ok().body(Response.success(reviewResponse));
 	}
 
 	//리뷰 전체 조회
-	@GetMapping(value = "/hospitals/{hospitalId}/reviews")
+	@GetMapping(value = "/list")
 	public ResponseEntity<Response<Page<ReviewListResponse>>> listReview(
 			@PageableDefault(size = 20) @SortDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 		Page<ReviewListResponse> reviewListResponses = reviewService.list(pageable);

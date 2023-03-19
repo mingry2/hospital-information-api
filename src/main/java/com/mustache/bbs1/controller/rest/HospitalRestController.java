@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/hospitals")
+@RequestMapping(value = "/api/v1/hospitals")
 @RequiredArgsConstructor
 public class HospitalRestController {
 
 	private final HospitalService hospitalService;
 
 	//병원 정보 상세 조회(단건)
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<Response<HospitalResponse>> getHospital(@PathVariable Long id) {
-		HospitalResponse hospitalResponse = hospitalService.get(id);
+	@GetMapping(value = "/{hospitalId}")
+	public ResponseEntity<Response<HospitalResponse>> getHospital(@PathVariable Long hospitalId) {
+		HospitalResponse hospitalResponse = hospitalService.get(hospitalId);
 
 		return ResponseEntity.ok().body(Response.success(hospitalResponse));
 	}

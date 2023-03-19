@@ -38,4 +38,5 @@ public class HospitalResponse {
 	public void setBusinessStatusName(String businessStatusName) {
 		this.businessStatusName = businessStatusName;
 	}
+
 }

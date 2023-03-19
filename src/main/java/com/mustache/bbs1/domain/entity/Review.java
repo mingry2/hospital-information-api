@@ -1,5 +1,6 @@
 package com.mustache.bbs1.domain.entity;
 
+import com.mustache.bbs1.domain.dto.review.ReviewCreateByForm;
 import com.mustache.bbs1.domain.dto.review.ReviewModifyRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,12 +38,20 @@ public class Review extends BaseEntity {
 	@JoinColumn(name = "user_id")
 	private User user; //리뷰 작성자
 
-	public void changeToReview(ReviewModifyRequest reviewModifyRequest) {
+	public void changeToReview(ReviewModifyRequest reviewModifyRequest, Hospital hospital) {
+		this.hospital = hospital;
 		this.amount = reviewModifyRequest.getAmount();
 		this.disease = reviewModifyRequest.getDisease();
 		this.title = reviewModifyRequest.getTitle();
 		this.content = reviewModifyRequest.getContent();
 
+	}
+
+	public Review(ReviewCreateByForm reviewCreateByForm,Hospital hospital,User user) {
+		this.title = reviewCreateByForm.getTitle();
+		this.content = reviewCreateByForm.getContent();
+		this.user = user;
+		this.hospital = hospital;
 	}
 
 }

@@ -1,15 +1,11 @@
 package com.mustache.bbs1.domain.dto.review;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Getter
-public class ReviewModifyRequest {
+@AllArgsConstructor
+public class ReviewCreateByForm {
 
 	private Long hospitalId;
 
@@ -20,5 +16,9 @@ public class ReviewModifyRequest {
 	private String title;
 
 	private String content;
+
+	private Long userId;
+
+	private String password;
 
 }

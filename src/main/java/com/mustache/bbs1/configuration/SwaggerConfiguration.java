@@ -16,13 +16,12 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 public class SwaggerConfiguration {
 
-	//http://localhost:8080/swagger-ui/
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.OAS_30)
 				.securityContexts(Arrays.asList(securityContext()))
 				.securitySchemes(Arrays.asList(apiKey()))
-//                .useDefaultResponseMessages(false) // 기본 응답 메세지 삭제 -> @ApiResponse 로 설명하지 않은 401, 403, 404 응답들이 사라짐.
+//                .useDefaultResponseMessages(false) //기본 응답 메세지 삭제 -> @ApiResponse 로 설명하지 않은 401, 403, 404 응답들이 사라짐.
 				.select()
 				.apis(RequestHandlerSelectors.basePackage(
 						"com.mustache.bbs1.controller.rest"))
@@ -30,7 +29,7 @@ public class SwaggerConfiguration {
 				.build();
 	}
 
-	// 스웨거 셋팅 -> authorize 버튼 생성
+	//스웨거 셋팅 -> authorize 버튼 생성
 	private SecurityContext securityContext() {
 		return SecurityContext.builder()
 				.securityReferences(defaultAuth())

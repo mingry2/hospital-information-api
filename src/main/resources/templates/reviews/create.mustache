@@ -1,0 +1,41 @@
+{{>layouts/header}}
+<form class="container" action="/reviews/create" method="post">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">병원번호</label>
+    <input type="text" class="form-control" name="hospitalId" id="exampleInputEmail1"
+           aria-describedby="hospitalId">
+    <div id="emailHelp" class="form-text">리뷰를 작성할 병원번호를 입력해주세요.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">작성자 이름</label>
+    <input type="text" class="form-control" name="hospitalId" id="exampleInputEmail1"
+           aria-describedby="hospitalId">
+    <div id="emailHelp" class="form-text">작성하는 분의 회원가입 시 이름을 입력해주세요.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">진단명</label>
+    <input type="text" class="form-control" name="disease" id="exampleInputEmail1"
+           aria-describedby="disease">
+    <div id="emailHelp" class="form-text">진단명을 입력해주세요.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">진료비</label>
+    <input type="text" class="form-control" name="amount" id="exampleInputEmail1"
+           aria-describedby="amount">
+    <div id="emailHelp" class="form-text">지불한 진료비를 입력해주세요.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">리뷰 제목</label>
+    <input type="text" class="form-control" name="title" id="exampleInputEmail1"
+           aria-describedby="title">
+    <div id="emailHelp" class="form-text">리뷰 제목을 입력하세요.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">리뷰 내용</label>
+    <input type="text" class="form-control" name="content" id="exampleInputPassword1">
+    <div id="emailHelp" class="form-text">리뷰 내용을 입력하세요.</div>
+  </div>
+  <button type="submit" class="btn btn-primary">작성 완료</button>
+  <a class="btn btn-primary" href="list" role="button">목록</a>
+</form>
+{{>layouts/footer}}

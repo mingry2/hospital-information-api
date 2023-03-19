@@ -1,21 +1,21 @@
 {{>layouts/header}}
 <table class="table">
-    <thead>
+  <thead>
+  <tr>
+    <th scope="col">번호</th>
+    <th scope="col">리뷰 제목</th>
+    <th scope="col">리뷰 내용</th>
+  </tr>
+  </thead>
+  <tbody>
+  {{#listReview}}
     <tr>
-        <th scope="col">ID</th>
-        <th scope="col">TITLE</th>
-        <th scope="col">CONTENT</th>
+      <th scope="row">{{id}}</th>
+      <td><a href="/reviews/{{id}}">{{title}}</a></td>
+      <td>{{content}}</td>
     </tr>
-    </thead>
-    <tbody>
-    {{#reviews}}
-    <tr>
-        <th scope="row">{{id}}</th>
-        <td><a href="/reviews/{{id}}">{{title}}</a></td>
-        <td>{{content}}</td>
-    </tr>
-    {{/reviews}}
-    </tbody>
+  {{/listReview}}
+  </tbody>
 </table>
-<a class="btn btn-primary" href="new" role="button">새 글쓰기</a>
+<a class="btn btn-primary" href="create" role="button">리뷰작성</a>
 {{>layouts/footer}}

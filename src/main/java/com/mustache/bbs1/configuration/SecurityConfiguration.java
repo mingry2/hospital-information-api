@@ -19,8 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
-	private final UserService userService;
-
 	@Value("${jwt.token.secret}")
 	private String secretKey;
 
@@ -32,18 +30,18 @@ public class SecurityConfiguration {
 				.cors().and() //cross 사이트에서 도메인이 다를 때 허용해주는 것
 				.authorizeRequests()
 				.antMatchers("/api/v1/users/**").permitAll() //join, login은 언제나 가능
-				.antMatchers(HttpMethod.GET, "/api/v1/hospitals/**").permitAll()
-				.antMatchers("/api/v1/hospitals/**")
-				.authenticated() //접근 요청 막기, permitAll 다음에 입력해줘야함, 순서대로 진행되기 때문
+				.antMatchers("/api/v1/hospitals/**").permitAll() //병,의원 조회는 모두 가능
+				.antMatchers("/reviews/**").permitAll() //리뷰 조회, 작성은 모두 가능
+				.antMatchers("/api/v1/reviews/**").authenticated()
 				.and()
 				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS) //jwt사용하는 경우 씀
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS) //세션 사용안함 -> jwt 사용
 				.and()
 				.exceptionHandling()
 				.authenticationEntryPoint(new CustomAuthenticationEntryPoint())
 				.and()
 				.addFilterBefore(new JwtFilter(secretKey),
-						UsernamePasswordAuthenticationFilter.class) //UserNamePasswordAuthenticationFilter적용하기 전에 JWTTokenFilter를 적용 하라는 뜻 입니다.
+						UsernamePasswordAuthenticationFilter.class) //UserNamePasswordAuthenticationFilter적용하기 전에 JWTTokenFilter를 적용 하라는 뜻
 				.build();
 	}
 

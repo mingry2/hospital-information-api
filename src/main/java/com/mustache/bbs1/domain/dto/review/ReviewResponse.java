@@ -27,10 +27,10 @@ public class ReviewResponse {
 
 	private String userName;
 
-	public static ReviewResponse toResponse(Hospital hospital, Review review) {
+	public static ReviewResponse toResponse(Review review) {
 		return ReviewResponse.builder()
 				.id(review.getId())
-				.hospitalName(hospital.getHospitalName())
+				.hospitalName(review.getHospital().getHospitalName())
 				.disease(review.getDisease())
 				.amount(review.getAmount())
 				.title(review.getTitle())

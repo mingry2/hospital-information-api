@@ -1,36 +1,52 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>전국병의원정보검색</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>전국병/의원정보검색</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+        crossorigin="anonymous">
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg bg-light" >
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/hospitals/home">
-            <img src="https://cdn-icons-png.flaticon.com/512/481/481987.png" alt="Bootstrap" width="65" height="65">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/hospitals/home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/hospitals/">List</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/hospitals/new">New</a>
-                </li>
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="https://cdn-icons-png.flaticon.com/512/481/481987.png" alt="Bootstrap" width="65"
+           height="65">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">홈</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/hospitals/list">전국병/의원조회</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/reviews/list">전체리뷰조회</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/reviews/create">리뷰작성</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/join">회원가입</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/login">로그인</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
+  </div>
 </nav>

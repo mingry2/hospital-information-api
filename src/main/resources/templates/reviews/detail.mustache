@@ -1,0 +1,19 @@
+{{>layouts/header}}
+<div class="card" style="width: 18rem;">
+  {{#review}}
+    <div class="card-body">
+      <h6 class="card-subtitle mb-2 text-muted">{{id}}</h6>
+      <h5 class="card-text">{{hospital.getHospitalName}}</h5>
+      <h5 class="card-text">{{disease}}</h5>
+      <h5 class="card-text">{{amount}}</h5>
+      <h5 class="card-text">{{title}}</h5>
+      <p class="card-text">{{content}}</p>
+      <p class="card-text">{{user.getUserName}}</p>
+      <a class="btn btn-primary" href="create" role="button">리뷰작성</a>
+      <a class="btn btn-primary" href="list" role="button">목록</a>
+    </div>
+    <a class="btn btn-primary" href="/reviews/{{id}}/edit" role="button">수정</a>
+    <a class="btn btn-danger" href="/reviews/{{id}}/delete" role="button">삭제</a>
+  {{/review}}
+</div>
+{{>layouts/footer}}

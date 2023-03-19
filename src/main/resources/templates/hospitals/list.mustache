@@ -1,42 +1,41 @@
 {{>layouts/header}}
-
 <form class="container" action="/hospitals/search" method="get">
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">지역명으로 검색</label>
-        <input type="text" class="form-control" name="keyword" id="exampleInputEmail1" aria-describedby="hospitalName">
-        <div id="emailHelp" class="form-text">찾으시려는 주소의 지역명을 입력해주세요.</div>
-    </div>
-    <button type="submit" class="btn btn-primary">Search</button>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">지역명으로 검색</label>
+    <input type="text" class="form-control" name="keyword" id="exampleInputEmail1"
+           aria-describedby="hospitalName">
+    <div id="emailHelp" class="form-text">찾으시려는 주소의 지역명을 입력해주세요.</div>
+  </div>
+  <button type="submit" class="btn btn-primary">검색</button>
 </form>
-
 <table class="table table-hover">
-    <thead>
+  <thead>
+  <tr>
+    <th scope="col">번호</th>
+    <th scope="col">병원명</th>
+    <th scope="col">도로명주소</th>
+  </tr>
+  </thead>
+  <tbody>
+  {{#hospitals}}
     <tr>
-        <th scope="col">번호</th>
-        <th scope="col">병원명</th>
-        <th scope="col">도로명주소</th>
+      <th scope="row">{{id}}</th>
+      <td><a href="/hospitals/{{id}}">{{hospitalName}}</a></td>
+      <td>{{roadNameAddress}}</td>
     </tr>
-    </thead>
-    <tbody>
-    {{#hospitals}}
-        <tr>
-            <th scope="row">{{id}}</th>
-            <td><a href="/hospitals/{{id}}">{{hospitalName}}</a></td>
-            <td>{{roadNameAddress}}</td>
-        </tr>
-    {{/hospitals}}
-    </tbody>
+  {{/hospitals}}
+  </tbody>
 </table>
 <ul class="pagination justify-content-center">
-    {{#keyword}}
-        <li class="page-item"><a class="page-link" href="?page={{previous}}&keyword={{keyword}}">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="?page={{next}}&keyword={{keyword}}">Next</a></li>
-    {{/keyword}}
-    {{^keyword}}
-        <li class="page-item"><a class="page-link" href="?page={{previous}}">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="?page={{next}}">Next</a></li>
-
-    {{/keyword}}
-
+  {{#keyword}}
+    <li class="page-item"><a class="page-link" href="?page={{previous}}&keyword={{keyword}}
+      ">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{next}}&keyword={{keyword}}">Next</a>
+    </li>
+  {{/keyword}}
+  {{^keyword}}
+    <li class="page-item"><a class="page-link" href="?page={{previous}}">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{next}}">Next</a></li>
+  {{/keyword}}
 </ul>
 {{>layouts/footer}}

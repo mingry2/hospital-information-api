@@ -33,15 +33,14 @@ public class ReviewService {
 
 	//리뷰 등록
 	@Transactional
-	public ReviewCreateResponse create(ReviewCreateRequest reviewCreateRequest, Long hospitalId,
-			String userName) {
+	public ReviewCreateResponse create(ReviewCreateRequest reviewCreateRequest, String userName) {
 		//userName이 존재하지 않으면 예외 발생
 		User user = userRepository.findByUserName(userName)
 				.orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND,
 						ErrorCode.USERNAME_NOT_FOUND.getMessage()));
 
 		//병원이 존재하지 않으면 예외 발생
-		Hospital hospital = hospitalRepository.findById(hospitalId)
+		Hospital hospital = hospitalRepository.findById(reviewCreateRequest.getHospitalId())
 				.orElseThrow(() -> new AppException(ErrorCode.HOSPITAL_NOT_FOUND,
 						ErrorCode.HOSPITAL_NOT_FOUND.getMessage()));
 
@@ -54,15 +53,15 @@ public class ReviewService {
 
 	//리뷰 수정
 	@Transactional
-	public ReviewModifyResponse modify(ReviewModifyRequest reviewModifyRequest, Long hospitalId,
-			Long reviewId, String userName) {
+	public ReviewModifyResponse modify(ReviewModifyRequest reviewModifyRequest, Long reviewId,
+			String userName) {
 		//userName이 존재하지 않으면 예외 발생
 		User user = userRepository.findByUserName(userName)
 				.orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND,
 						ErrorCode.USERNAME_NOT_FOUND.getMessage()));
 
 		//병원이 존재하지 않으면 예외 발생
-		Hospital hospital = hospitalRepository.findById(hospitalId)
+		Hospital hospital = hospitalRepository.findById(reviewModifyRequest.getHospitalId())
 				.orElseThrow(() -> new AppException(ErrorCode.HOSPITAL_NOT_FOUND,
 						ErrorCode.HOSPITAL_NOT_FOUND.getMessage()));
 
@@ -81,24 +80,20 @@ public class ReviewService {
 		}
 
 		//수정된 리뷰 저장
-		review.changeToReview(reviewModifyRequest);
+		review.changeToReview(reviewModifyRequest, hospital);
 		Review modifyReview = reviewRepository.saveAndFlush(review);
 
 		return ReviewModifyResponse.toResponse(modifyReview);
 
 	}
 
+	//리뷰 삭제
 	@Transactional
-	public ReviewDeleteResponse delete(Long hospitalId, Long reviewId, String userName) {
+	public ReviewDeleteResponse delete(Long reviewId, String userName) {
 		//userName이 존재하지 않으면 예외 발생
 		User user = userRepository.findByUserName(userName)
 				.orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND,
 						ErrorCode.USERNAME_NOT_FOUND.getMessage()));
-
-		//병원이 존재하지 않으면 예외 발생
-		Hospital hospital = hospitalRepository.findById(hospitalId)
-				.orElseThrow(() -> new AppException(ErrorCode.HOSPITAL_NOT_FOUND,
-						ErrorCode.HOSPITAL_NOT_FOUND.getMessage()));
 
 		//리뷰가 존재하지 않으면 예외 발생
 		Review review = reviewRepository.findById(reviewId)
@@ -123,18 +118,13 @@ public class ReviewService {
 	}
 
 	//리뷰 상세 조회(단건)
-	public ReviewResponse get(Long hospitalId, Long reviewId) {
-		//병원이 존재하지 않으면 예외 발생
-		Hospital hospital = hospitalRepository.findById(hospitalId)
-				.orElseThrow(() -> new AppException(ErrorCode.HOSPITAL_NOT_FOUND,
-						ErrorCode.HOSPITAL_NOT_FOUND.getMessage()));
-
+	public ReviewResponse get(Long reviewId) {
 		//리뷰가 존재하지 않으면 예외 발생
 		Review review = reviewRepository.findById(reviewId)
 				.orElseThrow(() -> new AppException(ErrorCode.REVIEW_NOT_FOUND,
 						ErrorCode.REVIEW_NOT_FOUND.getMessage()));
 
-		return ReviewResponse.toResponse(hospital, review);
+		return ReviewResponse.toResponse(review);
 	}
 
 	//리뷰 전체 조회

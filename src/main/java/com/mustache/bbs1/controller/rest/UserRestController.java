@@ -5,7 +5,6 @@ import com.mustache.bbs1.domain.dto.user.UserJoinRequest;
 import com.mustache.bbs1.domain.dto.user.UserJoinResponse;
 import com.mustache.bbs1.domain.dto.user.UserLoginRequest;
 import com.mustache.bbs1.domain.dto.user.UserLoginResponse;
-import com.mustache.bbs1.repository.UserRepository;
 import com.mustache.bbs1.service.UserService;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping(value = "/api/v1/users")
 @RequiredArgsConstructor
 public class UserRestController {
 

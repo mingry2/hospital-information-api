@@ -26,6 +26,6 @@ public class HospitalListResponse {
 				.roadNameAddress(hospital.getRoadNameAddress())
 				.hospitalName(hospital.getHospitalName())
 				.build();
-
 	}
+
 }

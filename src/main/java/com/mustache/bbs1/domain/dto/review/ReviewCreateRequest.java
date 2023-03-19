@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class ReviewCreateRequest {
 
+	private Long hospitalId;
 	private String disease;
 	private float amount;
 	private String title;
@@ -31,4 +32,5 @@ public class ReviewCreateRequest {
 				.user(user)
 				.build();
 	}
+
 }
