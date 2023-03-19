@@ -2,8 +2,8 @@
 
 ![](img/전국병의원정보API_title.png)    
 
-<a href="http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/swagger-ui/" target="_blank" rel="noreferrer noopener"><img src="https://img.shields.io/badge/swagger-4285F4?style=flat&logo=Google Chrome&logoColor=white" /></a>
-<a href="http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/" target="_blank" rel="noreferrer noopener"><img src="https://img.shields.io/badge/release-83B81A?style=flat&logo=Google Chrome&logoColor=white" /></a>
+<a href="http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/swagger-ui/" target="_blank"><img src="https://img.shields.io/badge/swagger-4285F4?style=flat&logo=Google Chrome&logoColor=white" /></a>
+<a href="http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/" target="_blank"><img src="https://img.shields.io/badge/release-83B81A?style=flat&logo=Google Chrome&logoColor=white" /></a>
 </div>
 
 # 🏥 소개    
