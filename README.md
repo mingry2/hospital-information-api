@@ -66,9 +66,13 @@ dependencies {
     implementation group: 'org.json', name: 'json', version: '20220924'
 }
 ```
-### ✅ 대용량 데이터 가공
+### ✅ 약 11만개의 대용량 데이터 가공
 - BufferedReader
-  - 대용량 데이터 파일을 한 줄씩 읽어와 가공 후 DB insert
+  - 대용량 데이터 파일을 읽어와 가공 후 DB insert    
+
+![](img/DBinsert.png)    
+
+![](img/데이터가공.png)
 ```
 public class FileController<T> {
 
