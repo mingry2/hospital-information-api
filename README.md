@@ -14,7 +14,9 @@
 ## 📌 Swagger:
 http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/swagger-ui/
 ## 📌 배포주소:
-http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/
+http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/    
+
+<br>
 
 # 개발환경
 - Spring Boot 2.7.5
@@ -25,9 +27,25 @@ http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/
 - Docker
 - mustache
 
+<br>
+
+# Tech Stack
+## back end
+![](img/skill1.png)
+## tool
+![](img/skill2.png)
+## infra
+![](img/skill3.png)
+## test & database
+![](img/skill5.png)    
+
+<br>
+
 # ERD
 
-![](img/전국병의원정보_erd.png)
+![](img/전국병의원정보_erd.png)    
+
+<br>
 
 # Architecture
 
@@ -43,7 +61,9 @@ http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/
 ### ✅ Front-end -> Mustache
 - Mustache + Bootstrap 사이트 페이지 구현    
 
-![](img/병의원API_메인페이지.png)
+![](img/병의원API_메인페이지.png)    
+
+<br>
 
 # 구현기능
 ### ✅ 프로젝트 빌드
@@ -143,7 +163,7 @@ public class HospitalParser implements Parser<Hospital>{
 ### ✅ 회원가입/로그인
 - Spring Security + JWT
   - 회원가입/로그인/조회 기능은 인증 없이 사용할 수 있도록 `.permitAll()`
-- 회원가입 시 password 는 BCryptPasswordEncoder 클래스를 사용하여 암호화 후 DB 저장    
+- 회원가입 시 password 는 `BCryptPasswordEncoder` 클래스를 사용하여 암호화 후 DB 저장    
 
 ![](img/DB저장.png)
 - DB에 저장된 user 정보와 매칭 후 로그인 성공하면 Token 발급    
@@ -201,7 +221,7 @@ public class HospitalParser implements Parser<Hospital>{
 - 작성자에 한해 수정, 삭제 가능
 - 리뷰 조회는 모든 사용자 가능
 - 리뷰 삭제 시 soft delete 기능을 사용
-  - row를 삭제하지 않고 보관 대신 deletedAt 필드에 삭제 된 시간을 기록
+  - row를 삭제하지 않고 보관, 대신 deletedAt 필드에 삭제 된 시간을 기록
 
 ### ✅ 지역별 병/의원 조회
 - 찾고자 하는 지역명을 키워드로 검색하여 조회
@@ -209,15 +229,4 @@ public class HospitalParser implements Parser<Hospital>{
 /hospitals/search?keyword=강남구
 ```
 ![](img/키워드조회.png)
-
-# Tech Stack
-## back end
-![](img/skill1.png)
-## tool
-![](img/skill2.png)
-## infra
-![](img/skill3.png)
-## test & database
-![](img/skill5.png)
-
 
