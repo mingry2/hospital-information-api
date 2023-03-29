@@ -6,8 +6,6 @@
 
 </div>
 
----
-
 # 전국 병/의원 정보 사이트
 
 > 전국 병,의원의 정보를 조회하고, 지역별로 검색할 수 있다.    
@@ -18,8 +16,6 @@ http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/swagger-ui/
 ## 📌 배포주소:
 http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/
 
----
-
 # 개발환경
 - Spring Boot 2.7.5
 - Gradle 7.5.1
@@ -29,13 +25,9 @@ http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/
 - Docker
 - mustache
 
----
-
 # ERD
 
 ![](img/전국병의원정보_erd.png)
-
----
 
 # Architecture
 
@@ -49,35 +41,52 @@ http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/
 ### ✅ Database -> mySQL
 ### ✅ CI / CD -> Github Actions
 ### ✅ Front-end -> Mustache
-- Mustache + Bootstrap 사이트 페이지 구현
+- Mustache + Bootstrap 사이트 페이지 구현    
+
 ![](img/병의원API_메인페이지.png)
 
----
-
 # 구현기능
+### ✅ 프로젝트 빌드
+```
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-mustache'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'org.projectlombok:lombok:1.18.22'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation group: 'org.springframework.security', name: 'spring-security-test'
+    implementation "io.springfox:springfox-boot-starter:3.0.0"
+    implementation "io.springfox:springfox-swagger-ui:3.0.0"
+    implementation group: 'org.json', name: 'json', version: '20220924'
+}
+```
 ### ✅ 대용량 데이터 가공
 - BufferedReader
   - 대용량 데이터 파일을 한 줄씩 읽어와 가공 후 DB insert
 ```
 public class FileController<T> {
 
-	//HospitalParser로 주입
 	private Parser<T> parser;
 
 	public FileController(Parser<T> parser) {
 		this.parser = parser;
 	}
 
-	//대용량파일 한줄씩 읽어오기
 	public List<T> readLine(String filename) {
 
-		List<T> list = new ArrayList<>(); //한줄씩 읽어온 정보 리스트에 담기
+		List<T> list = new ArrayList<>();
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filename));
 			String line;
 
-			br.readLine(); //첫째줄은 제목이기 때문에 넘기고 다음줄부터
+			br.readLine();
 			while ((line = br.readLine()) != null) {
 				try {
 					list.add(parser.parser(line));
@@ -85,13 +94,10 @@ public class FileController<T> {
 					System.out.printf("파싱 중 문제가 생겨 이 라인은 넘어갑니다. 파일내용 : %s\n", line);
 				}
 			}
-
 		} catch (IOException e) {
 
 		}
-
 		return list;
-
 	}
 }
 ```
@@ -127,36 +133,17 @@ public class HospitalParser implements Parser<Hospital>{
 		hospital.setTotalAreaSize(Float.parseFloat(row[32]));
 
 		return hospital;
-
 	}
-
 }
 ```
 ### ✅ 회원가입/로그인
 - Spring Security + JWT
   - 회원가입/로그인/조회 기능은 인증 없이 사용할 수 있도록 `.permitAll()`
-```
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-mustache'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
-    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
-    testImplementation 'org.projectlombok:lombok:1.18.22'
-    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'com.mysql:mysql-connector-j'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation group: 'org.springframework.security', name: 'spring-security-test'
-    implementation "io.springfox:springfox-boot-starter:3.0.0"
-    implementation "io.springfox:springfox-swagger-ui:3.0.0"
-    implementation group: 'org.json', name: 'json', version: '20220924'
-}
-```
-- 회원가입 시 password 는 BCryptPasswordEncoder 클래스를 사용하여 암호화 후 DB 저장
+- 회원가입 시 password 는 BCryptPasswordEncoder 클래스를 사용하여 암호화 후 DB 저장    
+
 ![](img/DB저장.png)
-- DB에 저장된 user 정보와 매칭 후 로그인 성공하면 Token 발급
+- DB에 저장된 user 정보와 매칭 후 로그인 성공하면 Token 발급    
+
 ![](img/토큰발급.png)
 
 ### ✅ 병/의원 조회
@@ -218,8 +205,6 @@ dependencies {
 /hospitals/search?keyword=강남구
 ```
 ![](img/키워드조회.png)
-
----
 
 # Tech Stack
 ## back end
