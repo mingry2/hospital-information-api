@@ -50,4 +50,4 @@ jobs:
       - name: Docker run
         run: |
               docker ps -q --filter "name=hospital-information-api" | grep -q . && docker stop "hospital-information-api" && docker rm  "hospital-information-api" && docker rmi  "minry20415/hospital-information-api:latest"
-              docker run -d --name hospital-information-api -e SPRING_DATASOURCE_URL=jdbc:mysql://ec2-43-200-2-61.ap-northeast-2.compute.amazonaws.com/hospital-review-db -e SPRING_DATASOURCE_USERNAME=root -e SPRING_DATASOURCE_PASSWORD=minmin5588 -e JWT_TOKEN_SECRET=totoken -p 8081:8080 minry20415/hospital-information-api:latest
+              docker run -d --name hospital-information-api -e SPRING_DATASOURCE_URL=jdbc:mysql://ec2-43-200-172-97.ap-northeast-2.compute.amazonaws.com/hospital-review-db -e SPRING_DATASOURCE_USERNAME=root -e SPRING_DATASOURCE_PASSWORD=minmin5588 -e JWT_TOKEN_SECRET=totoken -p 8081:8080 minry20415/hospital-information-api:latest
