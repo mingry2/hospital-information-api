@@ -171,7 +171,7 @@ public class HospitalParser implements Parser<Hospital>{
 ![](img/토큰발급.png)
 
 ### ✅ 병/의원 조회
-- Spring Data JPA 의 Pageable 사용
+- Spring Data JPA 의  Pageable 사용
 ```
 {
   "resultCode": "SUCCESS",
