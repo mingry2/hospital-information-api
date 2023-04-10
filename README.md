@@ -1,8 +1,8 @@
 <div align="center">
 
 ![](img/전국병의원정보API_title.png)    
-<a href="http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/swagger-ui/" target="_blank"><img src="https://img.shields.io/badge/Swagger-071D49?style=flat&logo=Google Chrome&logoColor=white" /></a>    
-[<img src="https://img.shields.io/badge/release-v1.0-critical?style=flat&logo=google-chrome&logoColor=white" />](http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/)
+<a href="http://ec2-52-79-111-128.ap-northeast-2.compute.amazonaws.com:8081/swagger-ui/" target="_blank"><img src="https://img.shields.io/badge/Swagger-071D49?style=flat&logo=Google Chrome&logoColor=white" /></a>    
+[<img src="https://img.shields.io/badge/release-v1.0-critical?style=flat&logo=google-chrome&logoColor=white" />](http://ec2-52-79-111-128.ap-northeast-2.compute.amazonaws.com:8081/)
 
 </div>
 
@@ -12,9 +12,11 @@
 > 회원가입/로그인 기능을 사용하여 병,의원의 리뷰를 작성하고 조회할 수 있다.
 
 ## 📌 Swagger:
-http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/swagger-ui/
+2023-04-10 update    
+http://ec2-52-79-111-128.ap-northeast-2.compute.amazonaws.com:8081/swagger-ui/
 ## 📌 배포주소:
-http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/    
+2023-04-10 update    
+http://ec2-52-79-111-128.ap-northeast-2.compute.amazonaws.com:8081/    
 
 <br>
 
@@ -39,7 +41,6 @@ http://ec2-13-209-66-87.ap-northeast-2.compute.amazonaws.com:8081/
 ## test & database
 ![](img/skill5.png)    
 
-<br>
 
 # ERD
 
