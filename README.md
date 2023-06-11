@@ -12,11 +12,11 @@
 > 회원가입/로그인 기능을 사용하여 병,의원의 리뷰를 작성하고 조회할 수 있다.
 
 ## 📌 Swagger: 
-2023-04-11 update    
-http://ec2-43-201-18-57.ap-northeast-2.compute.amazonaws.com:8081/swagger-ui/
+2023-06-11 update    
+http://ec2-15-164-93-201.ap-northeast-2.compute.amazonaws.com:8081/swagger-ui/
 ## 📌 배포주소:
-2023-04-11 update    
-http://ec2-43-201-18-57.ap-northeast-2.compute.amazonaws.com:8081/    
+2023-06-11 update    
+http://ec2-15-164-93-201.ap-northeast-2.compute.amazonaws.com:8081/    
 
 <br>
 
